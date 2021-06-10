@@ -1,0 +1,59 @@
+.bar {
+  height: 60px;
+  background-color: #28282b;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.cart-icon {
+  height: 35px;
+  margin-right: 21px;
+}
+.cart-icon-container {
+  position: relative;
+}
+.cart-count {
+  background: red;
+  border-radius: 55%;
+  padding: 4px 8px;
+  position: absolute;
+  right: 0;
+  /* top: -9; */
+}
+.logo {
+  color: white;
+  font-size: larger;
+  margin-left: 10px;
+  font-family: cursive;
+  min-width: 110px;
+}
+.search-box {
+  display: flex;
+  margin-top: 10px;
+  margin-left: 10px;
+  height: 90%;
+  width: 100%;
+}
+.search-box input {
+  height: 60%;
+  width: 100%;
+  border-radius: 4px;
+  border: transparent;
+  border-top-right-radius: 0%;
+  border-bottom-right-radius: 0%;
+}
+
+.search-button {
+  height: 63%;
+  border: transparent;
+  border-left: 1px solid grey;
+  border-radius: 4px;
+  border-top-left-radius: 0%;
+  border-bottom-left-radius: 0%;
+}
+.user-name {
+  margin: auto;
+  color: white;
+  font-family: cursive;
+  font-size: larger;
+}

@@ -1,0 +1,29 @@
+.paper {
+  margin: 5px;
+  padding: 2px;
+}
+.root {
+  margin: px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+}
+.form-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "cursive";
+}
+.fileinput {
+  width: 97%;
+  margin: 10px 0px;
+}
+.buttonSubmit {
+  margin-bottom: 10px;
+}
+.TextField {
+  margin-bottom: 4px;
+}

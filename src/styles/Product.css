@@ -1,0 +1,27 @@
+.productContainer {
+  margin: 10px;
+  height: 205px;
+  display: flex;
+  align-items: flex-start;
+  justify-self: start;
+  text-align: start;
+  border-bottom: 2px solid grey;
+}
+.imageContainer {
+  min-height: 200px;
+  min-width: 200px;
+  max-height: 200px;
+  max-width: 200px;
+}
+.imageContainer img {
+  min-height: 200px;
+  min-width: 200px;
+  max-width: 200px;
+  max-height: 200px;
+  object-fit: contain;
+  /* border: 1px solid black; */
+}
+.productDescription {
+  margin-left: 10px;
+  /* border: 1px solid black; */
+}
