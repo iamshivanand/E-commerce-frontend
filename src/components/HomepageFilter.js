@@ -169,7 +169,7 @@ function HomepageFilter({ Filters, setFilters }) {
             <ListItemText primary="Category" />
             {categoryOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
-          <Collapse in={categoryOpen} timeout="auto" unmountOnExit>
+          <Collapse in={categoryOpen} timeout="auto" >
             <List component="div" disablePadding className={classes.nested}>
               <FormGroup
                 aria-label="position"
@@ -245,7 +245,7 @@ function HomepageFilter({ Filters, setFilters }) {
             <ListItemText primary="Price" />
             {priceOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
-          <Collapse in={priceOpen} timeout="auto" unmountOnExit>
+          <Collapse in={priceOpen} timeout="auto" >
             <List component="div" disablePadding className={classes.nested}>
               <Typography id="range-slider" gutterBottom>
                 Price range
@@ -267,7 +267,7 @@ function HomepageFilter({ Filters, setFilters }) {
             <ListItemText primary="Brand" />
             {brandOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
-          <Collapse in={brandOpen} timeout="auto" unmountOnExit>
+          <Collapse in={brandOpen} timeout="auto">
             <List component="div" disablePadding className={classes.nested}>
               <FormGroup
                 aria-label="position"
@@ -393,7 +393,7 @@ function HomepageFilter({ Filters, setFilters }) {
             <ListItemText primary="Color" />
             {colorOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
-          <Collapse in={colorOpen} timeout="auto" unmountOnExit>
+          <Collapse in={colorOpen} timeout="auto" >
             <List component="div" disablePadding className={classes.nested}>
               <FormGroup
                 aria-label="position"
