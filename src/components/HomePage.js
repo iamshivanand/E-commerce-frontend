@@ -7,16 +7,28 @@ import Product from "./Product/Product";
 import Filter from "./HomepageFilter";
 import { getProduct } from "../actions/products";
 const HomePage = () => {
-  const products = useSelector((state) => state.products);
-  // const { result, next } = results;
+  // let products = [];
+  let products = [];
+  const Allproducts = useSelector((state) => state.products.products);
+  const searchedResults = useSelector(
+    (state) => state.products.searchedProducts
+  );
+  console.log("hello", !searchedResults.length);
+  {
+    !searchedResults.length
+      ? (products = Allproducts)
+      : (products = searchedResults);
+  }
+  console.log("searchedResults", searchedResults);
+
   const dispatch = useDispatch();
   const [page, setPage] = React.useState(1);
 
-  // console.log(result, next);
+  console.log("products", products);
 
   useEffect(() => {
-    dispatch(getProduct(page,products));
-  }, [page]);
+    dispatch(getProduct(page, products));
+  }, [page, dispatch]);
 
   const [Filters, setFilters] = React.useState({
     brandFilter: [],

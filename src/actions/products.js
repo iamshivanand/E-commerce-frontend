@@ -1,5 +1,9 @@
 import * as api from "../api";
-import { FETCH_ALL_PRODUCTS, CREATE_PRODUCT } from "./actionsType/actionType";
+import {
+  FETCH_ALL_PRODUCTS,
+  CREATE_PRODUCT,
+  SEARCH_PRODUCT,
+} from "./actionsType/actionType";
 
 //this actions is to get all the products from database
 export const getProduct = (page, prevResults) => async (dispatch) => {
@@ -16,16 +20,11 @@ export const getProduct = (page, prevResults) => async (dispatch) => {
       console.log(error.message);
     }
   } else {
-    console.log("Page is =", page, !page);
+  
     try {
       const { data } = await api.fetchProducts(page, 10);
-      const { result, next } = data;
+      const { result } = data;
       const newData = [...prevResults, ...result];
-
-      console.log("prevResults", prevResults);
-      console.log("result", result);
-      console.log("newData", newData);
-      console.log("next", next);
       const action = {
         type: FETCH_ALL_PRODUCTS,
         payload: newData,
@@ -48,5 +47,20 @@ export const createProduct = (productData) => async (dispatch) => {
     dispatch(action);
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+//this action is to search the product from the database
+
+export const searchProducts = (name) => async (dispatch) => {
+  try {
+    const { data } = await api.searchProducts(name);
+    const action = {
+      type: SEARCH_PRODUCT,
+      payload: data,
+    };
+    dispatch(action);
+  } catch (error) {
+    console.log(error);
   }
 };

@@ -3,11 +3,15 @@ import SearchIcon from "@material-ui/icons/Search";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import "../styles/Navbar.css";
-import { Button, Grid, Menu, MenuItem } from "@material-ui/core";
+import { Button, Menu, MenuItem } from "@material-ui/core";
 
+import { useDispatch } from "react-redux";
+import { searchProducts } from "../actions/products";
+import { Link, BrowserRouter } from "react-router-dom";
 function Navbar({ handleAddProduct }) {
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const [searchText, setSearchText] = React.useState("");
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -21,18 +25,46 @@ function Navbar({ handleAddProduct }) {
     setAnchorEl(null);
     handleAddProduct();
   };
-  
+  const handleSearch = (event) => {
+    setSearchText(event.target.value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    dispatch(searchProducts(searchText));
+  };
+  // const clear = () => {
+  //   setSearchText("");
+  // };
+
   return (
-    <Grid item >
+    <BrowserRouter>
       <div className="bar">
-        <div className="logo">
-          <span>E-commerce</span>
-        </div>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <div className="logo">
+            <span>E-commerce</span>
+          </div>
+        </Link>
         <div className="search-box">
-          <input type="text" id="search-text" name="searchText" />
-          <button className="search-button">
-            <SearchIcon />
-          </button>
+          <form
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            <input
+              value={searchText}
+              type="text"
+              id="search-text"
+              name="searchText"
+              placeholder="search......"
+              onChange={(e) => {
+                handleSearch(e);
+              }}
+            />
+            <button className="search-button">
+              <SearchIcon />
+            </button>
+          </form>
         </div>
         <div className="user-name">
           <Button
@@ -40,7 +72,7 @@ function Navbar({ handleAddProduct }) {
             aria-haspopup="true"
             onClick={handleClick}
           >
-            <AccountCircleIcon style={{ color: "white",fontSize: 40  }} />
+            <AccountCircleIcon style={{ color: "white", fontSize: 40 }} />
           </Button>
           <Menu
             id="simple-menu"
@@ -48,7 +80,6 @@ function Navbar({ handleAddProduct }) {
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
-          
           >
             <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My Account</MenuItem>
@@ -57,11 +88,11 @@ function Navbar({ handleAddProduct }) {
           </Menu>
         </div>
         <div className="cart-icon-container" style={{ color: "white" }}>
-          <ShoppingCartOutlinedIcon style={{ fontSize: 40 }}/>
+          <ShoppingCartOutlinedIcon style={{ fontSize: 40 }} />
           <span className="cart-count">1</span>
         </div>
       </div>
-    </Grid>
+    </BrowserRouter>
   );
 }
 

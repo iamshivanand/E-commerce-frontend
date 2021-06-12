@@ -1,13 +1,31 @@
-import { FETCH_ALL_PRODUCTS, CREATE_PRODUCT } from "../actions/actionsType/actionType";
-const products = (products = [], action) => {
+import {
+  FETCH_ALL_PRODUCTS,
+  CREATE_PRODUCT,
+  SEARCH_PRODUCT,
+} from "../actions/actionsType/actionType";
+const initalState = {
+  products: [],
+  searchedProducts: [],
+};
+const products = (state = initalState, action) => {
   switch (action.type) {
     case FETCH_ALL_PRODUCTS:
-      return action.payload;
+      return {
+        ...state,
+        products: action.payload,
+      };
     case CREATE_PRODUCT:
-      return [...products, action.payload];
-
+      return {
+        ...state,
+        products: [...products, action.payload],
+      };
+    case SEARCH_PRODUCT:
+      return {
+        ...state,
+        searchedProducts: action.payload,
+      };
     default:
-      return products;
+      return state;
   }
 };
 
