@@ -91,8 +91,13 @@ const HomePage = () => {
           priceRange={priceRange}
           setPriceRange={setPriceRange}
         />
-        <CircularProgress />
-        <div><h4>No more items</h4></div>
+        <div>
+          {!searchedResults.length && !Allproducts.length ? (
+            <h4>Loading...</h4>
+          ) : (
+            <h4>No items to display..</h4>
+          )}
+        </div>
       </Grid>
     </div>
   ) : (
