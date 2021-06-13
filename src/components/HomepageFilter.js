@@ -26,13 +26,12 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(4),
   },
 }));
-function HomepageFilter({ Filters, setFilters }) {
+function HomepageFilter({ Filters, setFilters, priceRange, setPriceRange }) {
   const { brandFilter, categoryFilter, colorFilter } = Filters;
   const classes = useStyles();
   const [categoryOpen, setCategoryOpen] = React.useState(false);
 
   const [priceOpen, setPriceOpen] = React.useState(false);
-  const [priceRange, setPriceRange] = React.useState([7, 2200]);
 
   const [brandOpen, setBrandOpen] = React.useState(false);
   const [colorOpen, setColorOpen] = React.useState(false);
@@ -169,7 +168,7 @@ function HomepageFilter({ Filters, setFilters }) {
             <ListItemText primary="Category" />
             {categoryOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
-          <Collapse in={categoryOpen} timeout="auto" >
+          <Collapse in={categoryOpen} timeout="auto">
             <List component="div" disablePadding className={classes.nested}>
               <FormGroup
                 aria-label="position"
@@ -185,6 +184,11 @@ function HomepageFilter({ Filters, setFilters }) {
                   value="men"
                   control={<Checkbox color="primary" />}
                   label="Men"
+                />
+                <FormControlLabel
+                  value="women"
+                  control={<Checkbox color="primary" />}
+                  label="Women"
                 />
                 <FormControlLabel
                   value="shoes"
@@ -217,11 +221,6 @@ function HomepageFilter({ Filters, setFilters }) {
                   label="Jewelery"
                 />
                 <FormControlLabel
-                  value="women"
-                  control={<Checkbox color="primary" />}
-                  label="Women"
-                />
-                <FormControlLabel
                   value="electronics"
                   control={<Checkbox color="primary" value="electronics" />}
                   label="Electronics"
@@ -245,7 +244,7 @@ function HomepageFilter({ Filters, setFilters }) {
             <ListItemText primary="Price" />
             {priceOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
-          <Collapse in={priceOpen} timeout="auto" >
+          <Collapse in={priceOpen} timeout="auto">
             <List component="div" disablePadding className={classes.nested}>
               <Typography id="range-slider" gutterBottom>
                 Price range
@@ -393,7 +392,7 @@ function HomepageFilter({ Filters, setFilters }) {
             <ListItemText primary="Color" />
             {colorOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
-          <Collapse in={colorOpen} timeout="auto" >
+          <Collapse in={colorOpen} timeout="auto">
             <List component="div" disablePadding className={classes.nested}>
               <FormGroup
                 aria-label="position"

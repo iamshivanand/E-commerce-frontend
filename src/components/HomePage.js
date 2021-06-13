@@ -7,7 +7,14 @@ import Product from "./Product/Product";
 import Filter from "./HomepageFilter";
 import { getProduct } from "../actions/products";
 const HomePage = () => {
-  // let products = [];
+  const [priceRange, setPriceRange] = React.useState([7, 2200]);
+  const [Filters, setFilters] = React.useState({
+    brandFilter: [],
+    categoryFilter: [],
+    colorFilter: [],
+  });
+  const [page, setPage] = React.useState(1);
+  const dispatch = useDispatch();
   let products = [];
   const Allproducts = useSelector((state) => state.products.products);
   const searchedResults = useSelector(
@@ -20,21 +27,11 @@ const HomePage = () => {
       : (products = searchedResults);
   }
   console.log("searchedResults", searchedResults);
-
-  const dispatch = useDispatch();
-  const [page, setPage] = React.useState(1);
-
   console.log("products", products);
 
   useEffect(() => {
     dispatch(getProduct(page, products));
   }, [page, dispatch]);
-
-  const [Filters, setFilters] = React.useState({
-    brandFilter: [],
-    categoryFilter: [],
-    colorFilter: [],
-  });
 
   //infinite scroll
 
@@ -51,13 +48,15 @@ const HomePage = () => {
     // if the page has reached to the bottom
 
     const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
-    // console.log("1:", scrollTop + clientHeight);
-    // console.log("2", scrollHeight);
 
     if (scrollTop + clientHeight >= scrollHeight - 1) {
       scrollToEnd();
     }
   };
+  const priceFilteredProducts = products.filter(
+    (product) => product.price > priceRange[0] && product.price < priceRange[1]
+  );
+  products = priceFilteredProducts;
 
   const AllFiteredProduct = [];
   for (let i = 0; i < products.length; i++) {
@@ -81,16 +80,30 @@ const HomePage = () => {
     }
   }
   const uniqueFilteredProducts = [...new Set(AllFiteredProduct)];
-
-  // console.log("allFilters", allFilters);
-  // console.log("uniqueFilteredProducts", uniqueFilteredProducts);
+  console.log("priceRange", priceRange[0], priceRange[1]);
 
   return !products.length ? (
-    <CircularProgress />
+    <div className="mainContainer">
+      <Grid container>
+        <Filter
+          Filters={Filters}
+          setFilters={setFilters}
+          priceRange={priceRange}
+          setPriceRange={setPriceRange}
+        />
+        <CircularProgress />
+        <div><h4>No more items</h4></div>
+      </Grid>
+    </div>
   ) : (
     <div className="mainContainer">
       <Grid container>
-        <Filter Filters={Filters} setFilters={setFilters} />
+        <Filter
+          Filters={Filters}
+          setFilters={setFilters}
+          priceRange={priceRange}
+          setPriceRange={setPriceRange}
+        />
         <Grid item xs={12} sm={12} md={8}>
           {!uniqueFilteredProducts.length
             ? products.map((product) => (
