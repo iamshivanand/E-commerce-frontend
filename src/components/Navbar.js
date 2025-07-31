@@ -1,7 +1,7 @@
 import React from "react";
-import { AppBar, Toolbar, Typography, InputBase, Badge, Avatar, Box } from "@material-ui/core";
-import { Search, ShoppingCartOutlined, AccountCircle } from "@material-ui/icons";
-import { makeStyles } from "@material-ui/core/styles";
+import { AppBar, Toolbar, Typography, InputBase, Badge, Avatar, Box } from "@mui/material";
+import { Search, ShoppingCartOutlined, AccountCircle } from "@mui/icons-material";
+import { makeStyles } from "@mui/styles";
 import { useDispatch } from "react-redux";
 import { searchProducts } from "../actions/products";
 import { Link } from "react-router-dom";

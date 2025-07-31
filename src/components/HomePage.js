@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { Grid, CircularProgress, Container, Box } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
+import { Grid, CircularProgress, Container, Box } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import Product from "./Product/Product";
 import Filter from "./HomepageFilter";
 import Banner from "./Banner/Banner";
 import { getProduct } from "../actions/products";
-import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {

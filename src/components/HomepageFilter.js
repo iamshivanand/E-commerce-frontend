@@ -1,19 +1,18 @@
 import React from "react";
 import {
   Grid,
-  Hidden,
   List,
   ListItem,
   ListItemText,
   Collapse,
-  makeStyles,
   Checkbox,
   FormControlLabel,
   FormGroup,
   Typography,
   Slider,
-} from "@material-ui/core";
-import { ExpandLess, ExpandMore } from "@material-ui/icons";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
 //styles for material ui of this page
 const useStyles = makeStyles((theme) => ({
@@ -160,8 +159,7 @@ function HomepageFilter({ Filters, setFilters, priceRange, setPriceRange }) {
   };
   //   console.log("Filters", brandFilter, categoryFilter, colorFilter);
   return (
-    <Hidden smDown xsDown>
-      <Grid item md={3}>
+    <Grid item md={3} sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
         <h3>Filters</h3>
         <div className="categories">
           <ListItem button onClick={handleCategory}>
@@ -454,7 +452,6 @@ function HomepageFilter({ Filters, setFilters, priceRange, setPriceRange }) {
           </Collapse>
         </div>
       </Grid>
-    </Hidden>
   );
 }
 
