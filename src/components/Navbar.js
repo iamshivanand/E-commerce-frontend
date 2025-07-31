@@ -1,99 +1,133 @@
 import React from "react";
-import SearchIcon from "@material-ui/icons/Search";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import "../styles/Navbar.css";
-import { Button, Menu, MenuItem } from "@material-ui/core";
-
+import { AppBar, Toolbar, Typography, InputBase, Badge, Avatar, Box } from "@material-ui/core";
+import { Search, ShoppingCartOutlined, AccountCircle } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { searchProducts } from "../actions/products";
-import { Link, BrowserRouter } from "react-router-dom";
-function Navbar({ handleAddProduct }) {
+import { Link } from "react-router-dom";
+
+const useStyles = makeStyles((theme) => ({
+  grow: {
+    flexGrow: 1,
+  },
+  title: {
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
+    },
+  },
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    "&:hover": {
+      backgroundColor: "rgba(255, 255, 255, 0.25)",
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(3),
+      width: "auto",
+    },
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  inputRoot: {
+    color: "inherit",
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+  sectionDesktop: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+      alignItems: "center",
+    },
+  },
+  sectionMobile: {
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
+}));
+
+const Navbar = ({ handleAddProduct }) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
-  const [anchorEl, setAnchorEl] = React.useState(null);
   const [searchText, setSearchText] = React.useState("");
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const addProduct = () => {
-    setAnchorEl(null);
-    handleAddProduct();
-  };
   const handleSearch = (event) => {
     setSearchText(event.target.value);
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-
     dispatch(searchProducts(searchText));
   };
-  // const clear = () => {
-  //   setSearchText("");
-  // };
 
   return (
-    <BrowserRouter>
-      <div className="bar">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <div className="logo">
-            <span>E-commerce</span>
+    <AppBar position="static">
+      <Toolbar>
+        <Typography className={classes.title} variant="h6" noWrap>
+          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            E-commerce
+          </Link>
+        </Typography>
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <Search />
           </div>
-        </Link>
-        <div className="search-box">
-          <form
-            onSubmit={(e) => {
-              handleSubmit(e);
-            }}
-          >
-            <input
-              value={searchText}
-              type="text"
-              id="search-text"
-              name="searchText"
-              placeholder="search......"
-              onChange={(e) => {
-                handleSearch(e);
+          <form onSubmit={handleSubmit}>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
               }}
+              inputProps={{ "aria-label": "search" }}
+              value={searchText}
+              onChange={handleSearch}
             />
-            <button className="search-button">
-              <SearchIcon />
-            </button>
           </form>
         </div>
-        <div className="user-name">
-          <Button
-            aria-controls="simple-menu"
-            aria-haspopup="true"
-            onClick={handleClick}
-          >
-            <AccountCircleIcon style={{ color: "white", fontSize: 40 }} />
-          </Button>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My Account</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
-            <MenuItem onClick={addProduct}>Add Product</MenuItem>
-          </Menu>
+        <div className={classes.grow} />
+        <div className={classes.sectionDesktop}>
+          <Box mr={2}>
+            <Badge badgeContent={1} color="secondary">
+              <ShoppingCartOutlined />
+            </Badge>
+          </Box>
+          <Avatar>
+            <AccountCircle />
+          </Avatar>
         </div>
-        <div className="cart-icon-container" style={{ color: "white" }}>
-          <ShoppingCartOutlinedIcon style={{ fontSize: 40 }} />
-          <span className="cart-count">1</span>
+        <div className={classes.sectionMobile}>
+          <Badge badgeContent={1} color="secondary">
+            <ShoppingCartOutlined />
+          </Badge>
+          <Avatar>
+            <AccountCircle />
+          </Avatar>
         </div>
-      </div>
-    </BrowserRouter>
+      </Toolbar>
+    </AppBar>
   );
-}
+};
 
 export default Navbar;
