@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const HomePage = () => {
+  console.log("HomePage: rendering");
   const classes = useStyles();
   const [priceRange, setPriceRange] = React.useState([7, 2200]);
   const [Filters, setFilters] = React.useState({
@@ -37,14 +38,21 @@ const HomePage = () => {
   const [page, setPage] = React.useState(1);
   const dispatch = useDispatch();
 
-  const { products: Allproducts, searchedProducts } = useSelector((state) => state.products);
+  const { products: Allproducts, searchedProducts } = useSelector((state) => {
+    console.log("HomePage: useSelector for products triggered", state.products);
+    return state.products;
+  });
   const products = searchedProducts.length ? searchedProducts : Allproducts;
+  console.log("HomePage: products from Redux:", products);
+
 
   useEffect(() => {
+    console.log("HomePage: useEffect for getProduct triggered with page:", page);
     dispatch(getProduct(page, products));
   }, [page, dispatch, products]);
 
   const scrollToEnd = () => {
+    console.log("HomePage: scrollToEnd called, setting new page");
     setPage((prevPage) => prevPage + 1);
   };
 

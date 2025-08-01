@@ -19,6 +19,7 @@ const useStyles = makeStyles({
 });
 
 const Product = ({ product }) => {
+  console.log("Product: rendering with product:", product);
   const classes = useStyles();
 
   return (

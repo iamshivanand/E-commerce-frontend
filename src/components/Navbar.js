@@ -68,16 +68,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar = ({ handleAddProduct }) => {
+  console.log("Navbar: rendering");
   const classes = useStyles();
   const dispatch = useDispatch();
   const [searchText, setSearchText] = React.useState("");
 
   const handleSearch = (event) => {
+    console.log("Navbar: handleSearch called with value:", event.target.value);
     setSearchText(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("Navbar: handleSubmit called with searchText:", searchText);
     dispatch(searchProducts(searchText));
   };
 

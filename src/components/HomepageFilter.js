@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function HomepageFilter({ Filters, setFilters, priceRange, setPriceRange }) {
+  console.log("HomepageFilter: rendering with Filters:", Filters, "and priceRange:", priceRange);
   const { brandFilter, categoryFilter, colorFilter } = Filters;
   const classes = useStyles();
   const [categoryOpen, setCategoryOpen] = React.useState(false);
